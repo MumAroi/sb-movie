@@ -2,8 +2,8 @@ services:
 
   app:
     build:
-      context: ./docker/spring_boot
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: /docker/spring_boot/Dockerfile
     volumes:
       - ./:/app
       - ./.m2:/root/.m2
