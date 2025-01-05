@@ -1,4 +1,19 @@
 services:
+
+  app:
+    build:
+      context: ./docker/spring_boot
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
+      - ./.m2:/root/.m2
+    working_dir: /app
+    command: sh ./docker/spring_boot/start.sh
+    ports:
+      - 8080:8080
+    depends_on:
+      - mariadb 
+
   redis:
     image: docker.io/redis:7-alpine
     container_name: redis

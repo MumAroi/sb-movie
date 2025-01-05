@@ -5,7 +5,7 @@ spring:
     datasource:
         username: root
         password: 44332211
-        url: jdbc:mariadb://localhost:3306/movies
+        url: jdbc:mariadb://mariadb:3306/movies
         driver-class-name: org.mariadb.jdbc.Driver
     jpa:
         hibernate:
