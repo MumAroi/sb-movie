@@ -11,6 +11,8 @@ services:
     command: sh ./docker/spring_boot/start.sh
     ports:
       - 8080:8080
+      - 35729:35729 # Port 35729 allows the livereload: https://chromewebstore.google.com/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei  plugin to listen to changes
+      - 5005:5005 # Port 5005 makes the debugger available to the IDE
     depends_on:
       - mariadb 
 
