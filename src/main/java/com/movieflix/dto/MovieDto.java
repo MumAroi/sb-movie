@@ -1,4 +1,4 @@
-package con.movieflix.dto;
+package com.movieflix.dto;
 
 import java.util.Set;
 import jakarta.validation.constraints.NotBlank;
@@ -27,4 +27,7 @@ public class MovieDto {
 
     @NotBlank(message = "Please provide movie's studio!")
     private String poster;
+
+    @NotBlank(message = "Please provide poster's url!")
+    private String posterUrl;
 }

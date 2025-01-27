@@ -1,6 +1,8 @@
 server:
     port:
         8082
+    servlet:
+        context-path: /api
 spring:
     datasource:
         username: root
@@ -20,3 +22,6 @@ spring:
             max-request-size: 10MB
 project:
     poster: posters/
+
+base:
+    url: http://localhost:8082

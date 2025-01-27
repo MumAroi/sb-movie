@@ -13,7 +13,7 @@ import java.io.InputStream;
 
 
 @RestController
-@RequestMapping("/files")
+@RequestMapping("/v1/files")
 public class FileController {
     
     private final FileService fileService;
