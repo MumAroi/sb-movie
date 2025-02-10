@@ -6,6 +6,7 @@ import com.movieflix.entities.Movie;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -61,11 +62,46 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public MovieDto getMovie(Integer id) {
-        return null;
+        Movie movie = movieRepository.findById(id).orElseThrow(() -> new RuntimeException("Movie no found!"));
+
+        String posterUrl = baseUrl + "/api/v1/files/" + movie.getPoster();
+
+        MovieDto response = new MovieDto(
+                movie.getId(),
+                movie.getTitle(),
+                movie.getDirector(),
+                movie.getStudio(),
+                movie.getMovieCast(),
+                movie.getReleaseYear(),
+                movie.getPoster(),
+                posterUrl);
+
+        return response;
     }
 
     @Override
     public List<MovieDto> getAllMovies() {
-        return null;
+        List<Movie> movies = movieRepository.findAll();
+
+        List<MovieDto> movieDtos = new ArrayList<>();
+
+        for (Movie movie : movies) {
+            String posterUrl = baseUrl + "/api/v1/files/" + movie.getPoster();
+
+            MovieDto response = new MovieDto(
+                    movie.getId(),
+                    movie.getTitle(),
+                    movie.getDirector(),
+                    movie.getStudio(),
+                    movie.getMovieCast(),
+                    movie.getReleaseYear(),
+                    movie.getPoster(),
+                    posterUrl);
+
+            movieDtos.add(response);
+
+        }
+
+        return movieDtos;
     }
 }

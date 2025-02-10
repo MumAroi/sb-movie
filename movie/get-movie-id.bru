@@ -1,0 +1,15 @@
+meta {
+  name: get-movie-id
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{domain}}/api/v1/movies/:movie_id
+  body: none
+  auth: none
+}
+
+params:path {
+  movie_id: 1
+}
