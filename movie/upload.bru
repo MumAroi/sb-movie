@@ -1,0 +1,15 @@
+meta {
+  name: upload
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{domain}}/api/v1/files/upload
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  file: @file(/Users/paramas_w/Downloads/Oh my lol.png)
+}

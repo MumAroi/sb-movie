@@ -21,7 +21,7 @@ public class MovieServiceImpl implements MovieService {
     @Value("${project.poster}")
     private String path;
 
-    @Value("${base:url}")
+    @Value("${base.url}")
     private String baseUrl;
 
     public MovieServiceImpl(MovieRepository movieRepository, FileService fileService) {
@@ -44,7 +44,7 @@ public class MovieServiceImpl implements MovieService {
 
         Movie saveMovie = movieRepository.save(movie);
 
-        String posterUrl = baseUrl + "/file/" + uploadFileName;
+        String posterUrl = baseUrl + "/api/v1/files/" + uploadFileName;
 
         MovieDto response = new MovieDto(
                 saveMovie.getId(),

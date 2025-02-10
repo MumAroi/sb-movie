@@ -1,0 +1,15 @@
+meta {
+  name: getfile
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{domain}}/api/v1/files/:file_name
+  body: none
+  auth: none
+}
+
+params:path {
+  file_name: 
+}

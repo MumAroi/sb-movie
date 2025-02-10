@@ -27,7 +27,7 @@ public class MovieController {
 
     @PostMapping("")
     public ResponseEntity<MovieDto> addMovieHandler(
-            @RequestPart MultipartFile file,
+            @RequestPart("file") MultipartFile file,
             @RequestPart String movieDto) throws IOException {
         MovieDto dto = convertToMovieDto(movieDto);
         return new ResponseEntity<>(movieService.addMovie(dto, file), HttpStatus.CREATED);

@@ -1,0 +1,38 @@
+meta {
+  name: store-movie
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{domain}}/api/v1/movies
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  file: @file(/Users/paramas_w/Downloads/Oh my lol.png)
+  movieDto: '''
+    {
+        "id": 1,
+        "title": "Avengers: Infinity War",
+        "director": "Russo Brothers",
+        "studio": "Marvel Studios",
+        "movieCast": [
+            "Robert Downey Jr.",
+            "Chris Evans",
+            "Mark Ruffalo",
+            "Chris Hemsworth",
+            "Scarlett Johansson",
+            "Jeremy Renner",
+            "Don Cheadle",
+            "Paul Rudd",
+            "Diana Cooper",
+            "Antony Starr"
+        ],
+        "releaseYear": "2018",
+        "poster": "Oh my lol.png",
+        "posterUrl": "url"
+    }
+  '''
+}

@@ -3,24 +3,24 @@ services:
   app:
     build:
       context: .
-      dockerfile: /docker/spring_boot/Dockerfile
+      dockerfile: ./docker/spring_boot/Dockerfile
     volumes:
       - ./:/app
       - ./.m2:/root/.m2
     working_dir: /app
     command: sh ./docker/spring_boot/start.sh
     ports:
-      - 8080:8080
+      - 3003:8082
       - 35729:35729 # Port 35729 allows the livereload: https://chromewebstore.google.com/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei  plugin to listen to changes
       - 5005:5005 # Port 5005 makes the debugger available to the IDE
     depends_on:
       - mariadb 
 
-  redis:
-    image: docker.io/redis:7-alpine
-    container_name: redis
-    ports:
-      - 6379:6379
+  # redis:
+  #   image: docker.io/redis:7-alpine
+  #   container_name: redis
+  #   ports:
+  #     - 6379:6379
 
   # Mariadb Service
   mariadb:
