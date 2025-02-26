@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,6 +46,22 @@ public class MovieController {
     @GetMapping("")
     public ResponseEntity<List<MovieDto>> getAllMoviesHandler() {
         return ResponseEntity.ok(movieService.getAllMovies());
+    }
+
+    @PutMapping("/{movieId}")
+    public ResponseEntity<MovieDto> updateMovieHandler(
+            @PathVariable Integer movieId,
+            @RequestPart("file") MultipartFile file,
+            @RequestPart String movieDtoObj) throws IOException {
+        if (file.isEmpty())
+            file = null;
+        MovieDto movieDto = convertToMovieDto(movieDtoObj);
+        return ResponseEntity.ok(movieService.updateMovie(movieId, movieDto, file));
+    }
+
+    @DeleteMapping("/{movieId}")
+    public ResponseEntity<String> deleteMovieHandler(@PathVariable Integer movieId) throws IOException {
+        return ResponseEntity.ok(movieService.deleteMovie(movieId));
     }
 
     private MovieDto convertToMovieDto(String movieDtoObj) throws JsonProcessingException {

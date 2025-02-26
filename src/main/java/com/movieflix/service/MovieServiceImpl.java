@@ -5,7 +5,10 @@ import com.movieflix.entities.Movie;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,5 +106,55 @@ public class MovieServiceImpl implements MovieService {
         }
 
         return movieDtos;
+    }
+
+    @Override
+    public MovieDto updateMovie(Integer id, MovieDto movieDto, MultipartFile file) throws IOException {
+        Movie mv = movieRepository.findById(id).orElseThrow(() -> new RuntimeException("Movie not found!"));
+
+        String fileName = mv.getPoster();
+        if (file != null) {
+            Files.deleteIfExists(Paths.get(path + File.separator + fileName));
+            fileName = fileService.uploadFile(path, file);
+        }
+
+        movieDto.setPoster(fileName);
+
+        Movie movie = new Movie(
+                mv.getId(),
+                movieDto.getTitle(),
+                movieDto.getDirector(),
+                movieDto.getStudio(),
+                movieDto.getMovieCast(),
+                movieDto.getReleaseYear(),
+                movieDto.getPoster());
+
+        Movie updatedMovie = movieRepository.save(movie);
+
+        String posterUrl = baseUrl + "/api/v1/files/" + fileName;
+
+        MovieDto response = new MovieDto(
+                updatedMovie.getId(),
+                updatedMovie.getTitle(),
+                updatedMovie.getDirector(),
+                updatedMovie.getStudio(),
+                updatedMovie.getMovieCast(),
+                updatedMovie.getReleaseYear(),
+                updatedMovie.getPoster(),
+                posterUrl);
+
+        return response;
+    }
+
+    @Override
+    public String deleteMovie(Integer id) throws IOException {
+        Movie mv = movieRepository.findById(id).orElseThrow(() -> new RuntimeException("Movie not found!"));
+        Integer movieId = mv.getId();
+
+        Files.deleteIfExists(Paths.get(path + File.separator + mv.getPoster()));
+
+        movieRepository.delete(mv);
+
+        return "Movie deleted with id: " + movieId;
     }
 }
