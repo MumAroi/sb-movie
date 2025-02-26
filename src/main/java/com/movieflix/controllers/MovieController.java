@@ -52,11 +52,11 @@ public class MovieController {
     public ResponseEntity<MovieDto> updateMovieHandler(
             @PathVariable Integer movieId,
             @RequestPart("file") MultipartFile file,
-            @RequestPart String movieDtoObj) throws IOException {
+            @RequestPart String movieDto) throws IOException {
         if (file.isEmpty())
             file = null;
-        MovieDto movieDto = convertToMovieDto(movieDtoObj);
-        return ResponseEntity.ok(movieService.updateMovie(movieId, movieDto, file));
+        MovieDto dto = convertToMovieDto(movieDto);
+        return ResponseEntity.ok(movieService.updateMovie(movieId, dto, file));
     }
 
     @DeleteMapping("/{movieId}")

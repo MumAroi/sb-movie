@@ -1,0 +1,45 @@
+meta {
+  name: update-movies
+  type: http
+  seq: 7
+}
+
+put {
+  url: {{domain}}/api/v1/movies/:movie_id
+  body: multipartForm
+  auth: none
+}
+
+params:path {
+  movie_id: 2
+}
+
+body:form-urlencoded {
+  : 
+}
+
+body:multipart-form {
+  file: @file(/Users/paramas_w/Desktop/Screenshot 2568-02-25 at 17.14.04.png)
+  movieDto: '''
+    {
+        "title": "Avengers: Infinity War",
+        "director": "Russo Brothers",
+        "studio": "Marvel Studios",
+        "movieCast": [
+            "Robert Downey Jr.",
+            "Chris Evans",
+            "Mark Ruffalo",
+            "Chris Hemsworth",
+            "Scarlett Johansson",
+            "Jeremy Renner",
+            "Don Cheadle",
+            "Paul Rudd",
+            "Diana Cooper",
+            "Antony Starr"
+        ],
+        "releaseYear": "2018",
+        "poster": "Oh my lol.png",
+        "posterUrl": "url"
+    }
+  '''
+}
