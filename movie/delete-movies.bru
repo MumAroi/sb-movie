@@ -1,12 +1,12 @@
 meta {
-  name: update-movies
+  name: delete-movies
   type: http
-  seq: 7
+  seq: 8
 }
 
-put {
+delete {
   url: {{domain}}/api/v1/movies/:movie_id
-  body: multipartForm
+  body: none
   auth: none
 }
 
