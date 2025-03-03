@@ -1,0 +1,16 @@
+meta {
+  name: get-movies-pagination
+  type: http
+  seq: 9
+}
+
+get {
+  url: {{domain}}/api/v1/movies/pagination?pageNumber=1&pageSize=2
+  body: none
+  auth: none
+}
+
+params:query {
+  pageNumber: 1
+  pageSize: 2
+}

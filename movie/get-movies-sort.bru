@@ -1,0 +1,16 @@
+meta {
+  name: get-movies-sort
+  type: http
+  seq: 10
+}
+
+get {
+  url: {{domain}}/api/v1/movies/sort?sortBy=title&dir=desc
+  body: none
+  auth: none
+}
+
+params:query {
+  sortBy: title
+  dir: desc
+}

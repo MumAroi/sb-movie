@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.movieflix.dto.MovieDto;
+import com.movieflix.dto.MoviePageResponse;
 import com.movieflix.service.MovieService;
+import com.movieflix.utils.AppConstants;
 import com.movieflix.exceptions.EmptyFileException;;;
 
 @RestController
@@ -51,6 +54,24 @@ public class MovieController {
     @GetMapping("")
     public ResponseEntity<List<MovieDto>> getAllMoviesHandler() {
         return ResponseEntity.ok(movieService.getAllMovies());
+    }
+
+    @GetMapping("pagination")
+    public ResponseEntity<MoviePageResponse> getMovieWithPaginationHandler(
+        @RequestParam(defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
+        @RequestParam(defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize
+    ) {
+        return ResponseEntity.ok(movieService.getAllMoviesWithPagination(pageNumber, pageSize));
+    }
+
+    @GetMapping("sort")
+    public ResponseEntity<MoviePageResponse> getMovieWithPaginationAndSortingHandler(
+        @RequestParam(defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
+        @RequestParam(defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
+        @RequestParam(defaultValue = AppConstants.SORT_BY, required = false) String sortBy,
+        @RequestParam(defaultValue = AppConstants.SORT_DIR, required = false) String dir
+    ) { 
+        return ResponseEntity.ok(movieService.getAllMoviesWithPaginationSorting(pageNumber, pageSize, sortBy, dir));
     }
 
     @PutMapping("/{movieId}")
