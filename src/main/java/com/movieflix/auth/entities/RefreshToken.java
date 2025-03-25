@@ -1,18 +1,13 @@
 package com.movieflix.auth.entities;
 
-import java.time.Instant;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.time.Instant;
 
 @Entity
 @Builder
@@ -26,7 +21,7 @@ public class RefreshToken {
     private Integer id;
 
     @Column(nullable = false, length = 500)
-    @NotBlank(message = "Refresh token is required")
+    @NotBlank(message = "Please enter refresh token value!")
     private String refreshToken;
 
     @Column(nullable = false)

@@ -7,11 +7,15 @@ meta {
 post {
   url: {{domain}}/api/v1/movies
   body: multipartForm
-  auth: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjpbeyJhdXRob3JpdHkiOiJVU0VSIn1dLCJzdWIiOiJhcm9pbWFrciIsImlhdCI6MTc0Mjg5ODIwNiwiZXhwIjoxNzQyOTAwNzA2fQ.pVhM8VBlLmscBu5L8gR_x5vBD52t6ywC9pM6Z3iyMHA
 }
 
 body:multipart-form {
-  file: @file(/Users/paramas_w/Downloads/Oh my lol.png)
+  file: @file(/Users/paramas_w/Downloads/a3w8c1cxgdh11.jpg)
   movieDto: '''
     {
         "id": 1,

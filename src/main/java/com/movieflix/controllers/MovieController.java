@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +35,7 @@ public class MovieController {
         this.movieService = movieService;
     }
 
+    @PreAuthorize("hashAuthority('ADMIN')")
     @PostMapping("")
     public ResponseEntity<MovieDto> addMovieHandler(
             @RequestPart("file") MultipartFile file,
@@ -70,7 +72,7 @@ public class MovieController {
         @RequestParam(defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
         @RequestParam(defaultValue = AppConstants.SORT_BY, required = false) String sortBy,
         @RequestParam(defaultValue = AppConstants.SORT_DIR, required = false) String dir
-    ) { 
+    ) {
         return ResponseEntity.ok(movieService.getAllMoviesWithPaginationSorting(pageNumber, pageSize, sortBy, dir));
     }
 

@@ -1,0 +1,17 @@
+meta {
+  name: refresh-token
+  type: http
+  seq: 13
+}
+
+post {
+  url: {{domain}}/api/v1/auth/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+     "refreshToken": "3fe8e5f6-aed3-46d6-bb3e-3f9748631c8a"
+  }
+}
