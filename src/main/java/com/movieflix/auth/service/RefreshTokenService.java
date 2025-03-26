@@ -33,14 +33,14 @@ public class RefreshTokenService {
                 )
             );
 
-        RefreshToken refreshToken = user.getRefreshToken();
+        RefreshToken refreshToken = refreshTokenRepository.findByUserId(user.getId()).orElse(null);
 
         if (refreshToken == null) {
             long refreshTokenValidity = 30 * 100000;
             refreshToken = RefreshToken.builder()
                 .refreshToken(UUID.randomUUID().toString())
                 .expirationTime(Instant.now().plusMillis(refreshTokenValidity))
-                .user(user)
+                .userId(user.getId())
                 .build();
 
             refreshTokenRepository.save(refreshToken);

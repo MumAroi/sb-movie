@@ -27,6 +27,7 @@ public class RefreshToken {
     @Column(nullable = false)
     private Instant expirationTime;
 
-    @OneToOne
-    private User user;
+    @Column(nullable = false)
+    private Integer userId;
+
 }
